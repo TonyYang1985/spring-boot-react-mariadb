@@ -32,14 +32,12 @@ spring-boot-react-mariadb: Spring Boot + JPA + Docker + Mariadb  + Openjdk + Mav
 
 
 ## 6. Getting Started React Frontend Project 
-### Running Frontend Application as following steps:
 * Login Application Spring Boot 
 * 表单显示
 * 数据对象显示
 
 
 ## 7. Running API UnitTest   
-### Running API UnitTest  
 * 表单提交，带前端和后端API数据校验
 * 表单显示
 * 数据对象显示
