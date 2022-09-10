@@ -8,5 +8,5 @@ import lombok.experimental.FieldDefaults;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class DeleteUserRequest {
-	int id;
+	public int id;
 }

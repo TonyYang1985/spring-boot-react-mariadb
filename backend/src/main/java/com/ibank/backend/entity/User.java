@@ -16,19 +16,25 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "user", 
+    uniqueConstraints = { 
+      @UniqueConstraint(columnNames = "email") 
+    })
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
     
-    @NotEmpty(message = "First name is required")
-    private String firstname;
+    @NotEmpty(message = "username is required")
+    private String username;
 
-    @NotEmpty(message = "Last name is required")
-    private String lastname;
+    @NotEmpty(message = "password is required")
+    private String password;
 
     @Column(nullable = true, name = "email")
     private String email;
+
+    @NotEmpty(message = "status is required")
+    private String status;
 }

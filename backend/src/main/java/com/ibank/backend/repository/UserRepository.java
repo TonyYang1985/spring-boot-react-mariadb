@@ -17,8 +17,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
      * @return  A list of User whose last name is an exact match with the given last name.
      *          If no persons is found, this method returns an empty list.
      */
-    @Query("SELECT u FROM User u WHERE LOWER(u.firstname) = LOWER(:firstname)")
-    public List<User> findByName(@Param("firstname") String firstname);
+    @Query("SELECT u FROM User u WHERE LOWER(u.username) = LOWER(:username)")
+    public List<User> findByName(@Param("username") String username);
 
           /**
      * Finds User by using the first name as a search criteria.
@@ -27,7 +27,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
      *          If no persons is found, this method returns an empty list.
      */
     @Query("SELECT u FROM User u WHERE LOWER(u.email) = LOWER(:email)")
-    public List<User> findByEmail(@Param("email") String email);
+    public User findByEmail(@Param("email") String email);
 
 
           /**
@@ -38,5 +38,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
      */
     @Query("SELECT u FROM User u WHERE u.id  = :id")
     public User findByUserId(@Param("id") int id);
+
+    @Query("SELECT u FROM User u WHERE LOWER(u.username) = LOWER(:username) and u.password = :password ")
+    public User findByUnique(@Param("username") String username,@Param("password") String password);
 }
 

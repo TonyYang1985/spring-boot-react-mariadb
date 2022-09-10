@@ -11,9 +11,9 @@ public class UserVo implements Serializable {
  
     private int id;
 
-    private String firstname;
+    private String username;
 
-    private String lastname;
+    private String password;
 
     private String email;
 

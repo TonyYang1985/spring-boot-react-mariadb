@@ -7,6 +7,6 @@ import lombok.experimental.FieldDefaults;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class TranferRequest {
-    double amount;
-    String payee;
+    public  double amount;
+    public  String payee;
 }

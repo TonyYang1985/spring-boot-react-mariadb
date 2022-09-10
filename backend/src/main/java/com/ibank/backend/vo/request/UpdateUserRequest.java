@@ -7,8 +7,7 @@ import lombok.experimental.FieldDefaults;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UpdateUserRequest {
-	int id;
-	String firstname;
-	String lastname;
-	String email;
+	public int id;
+	public String username;
+	public String email;
 }

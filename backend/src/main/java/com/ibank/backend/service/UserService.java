@@ -5,18 +5,21 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import com.ibank.backend.entity.User;
 import com.ibank.backend.facade.IUserFacade;
 import com.ibank.backend.repository.UserRepository;
 import com.ibank.backend.utils.BeanMapper;
+import com.ibank.backend.utils.CreateJwt;
 import com.ibank.backend.vo.UserVo;
 import com.ibank.backend.vo.request.CreateUserRequest;
 import com.ibank.backend.vo.request.DeleteUserRequest;
+import com.ibank.backend.vo.request.LoginRequest;
+import com.ibank.backend.vo.request.SignupRequest;
 import com.ibank.backend.vo.request.UpdateUserRequest;
 import com.ibank.backend.vo.response.CreateUserResponse;
 import com.ibank.backend.vo.response.DeleteUserResponse;
+import com.ibank.backend.vo.response.JwtResponse;
 import com.ibank.backend.vo.response.ListUserResponse;
 import com.ibank.backend.vo.response.UniqueUserResponse;
 import com.ibank.backend.vo.response.UpdateUserResponse;
@@ -88,13 +91,13 @@ public class UserService  implements IUserFacade {
     public CreateUserResponse createUser(CreateUserRequest request) {
       CreateUserResponse resp = new CreateUserResponse();
       try {
-         List<User> entitys = userRepo.findByEmail(request.getEmail());
-         if(CollectionUtils.isEmpty(entitys)){
+        User entitys =  userRepo.findByUnique(request.username,request.password);
+         if(entitys==null){
             User u = new User();
-            u .setFirstname(request.getFirstname());
-            u .setLastname(request.getLastname());
-            u .setEmail(request.getEmail());
-
+            u.setUsername(request.getUsername());
+            u.setEmail(request.getEmail());
+            u.setStatus("Y");
+            u.setPassword(request.getPassword());
             User result = userRepo.save(u);
             resp.setId(result.getId());
             resp.setRetCode(HttpStatus.OK.value());
@@ -150,9 +153,9 @@ public class UserService  implements IUserFacade {
             if(entity != null){
                User u = new User();
                u.setId(request.getId());
-               u .setFirstname(request.getFirstname());
-               u .setLastname(request.getLastname());
-               u .setEmail(request.getEmail());
+               u.setUsername(request.getUsername());
+               u.setEmail(request.getEmail());
+               u.setStatus("Y");
                userRepo.save(u);
                UserVo userVo = BeanMapper.map( u, UserVo.class);
                resp.setUser(userVo);
@@ -166,4 +169,36 @@ public class UserService  implements IUserFacade {
            }
           return resp;
     }
+    @Override
+    public JwtResponse authenticate(LoginRequest request) {
+      JwtResponse resp = new JwtResponse();
+      User entity =  userRepo.findByUnique(request.username,request.password);
+      String jwttoken=CreateJwt.getoken(entity);
+      resp.setJwttoken(jwttoken);
+      resp.setRetCode(HttpStatus.OK.value());
+      resp.setRetMsg(" User Authenticate  Success");
+      return resp;
+    }
+    @Override
+    public JwtResponse signUp(SignupRequest request) {
+      JwtResponse resp = new JwtResponse();
+      User entity =  userRepo.findByUnique(request.username,request.password);
+      if(entity ==null){
+        User u = new User();
+        u.setUsername(request.getUsername());
+        u.setEmail(request.getEmail());
+        u.setPassword(request.getPassword());
+        u.setStatus("Y");
+        userRepo.save(u);
+        String jwttoken=CreateJwt.getoken(entity);
+        resp.setJwttoken(jwttoken);
+        resp.setRetCode(HttpStatus.OK.value());
+        resp.setRetMsg(" Sign Up  Success");
+      }else{
+        resp.setRetCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        resp.setRetMsg(" Sign Up  Failed");
+      }
+      return resp;
+    }
+  
 }
