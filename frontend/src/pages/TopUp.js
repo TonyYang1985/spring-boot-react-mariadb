@@ -4,7 +4,7 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
-import AuthService from "../services/auth.service";
+import OptService from "../services/opt.service";
 
 const validateNumberField = myNumber => {
     const numberRegEx = /\-?\d*\.?\d{1,2}/;
@@ -44,7 +44,7 @@ const TopUp = () => {
     setLoading(true);
     form.current.validateAll();
     if (checkBtn.current.context._errors.length === 0) {
-      AuthService.login(amount).then(
+      OptService.topup(amount).then(
         () => {
           navigate("/home");
           window.location.reload();

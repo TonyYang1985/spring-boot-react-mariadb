@@ -1,29 +1,29 @@
 import axios from "axios";
 import authHeader from "./auth-header";
 
-const API_URL = "http://localhost:8082/user/";
 
 const getPublicContent = () => {
-  return axios.get("/api/user")
+  return axios.get("/api/user",{ headers: authHeader() })
 };
 
 const getUserBoard = () => {
   return axios.get("/api/user", { headers: authHeader() });
 };
 
-const getModeratorBoard = () => {
-  return axios.get(API_URL + "mod", { headers: authHeader() });
-};
-
-const getAdminBoard = () => {
-  return axios.get(API_URL + "admin", { headers: authHeader() });
+const create = (username, email, password) => {
+  return axios.post("/api/user", {
+     username,
+     email,
+     password,
+  }, { headers: authHeader()}).then((response) => {
+  return response.data;
+});
 };
 
 const UserService = {
   getPublicContent,
   getUserBoard,
-  getModeratorBoard,
-  getAdminBoard,
+  create
 };
 
 export default UserService;
