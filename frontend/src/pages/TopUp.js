@@ -6,49 +6,47 @@ import CheckButton from "react-validation/build/button";
 
 import AuthService from "../services/auth.service";
 
+const validateNumberField = myNumber => {
+    const numberRegEx = /\-?\d*\.?\d{1,2}/;
+    return numberRegEx.test(String(myNumber).toLowerCase());
+  };
+
+  
+
 const required = (value) => {
-  if (!value) {
+
+  if (!value && validateNumberField(value) ) {
     return (
       <div className="alert alert-danger" role="alert">
-        This field is required!
+        This field is number &  required!
       </div>
     );
   }
 };
 
-const Login = () => {
+const TopUp = () => {
   let navigate = useNavigate();
-
   const form = useRef();
   const checkBtn = useRef();
-
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const onChangeUsername = (e) => {
-    const username = e.target.value;
-    setUsername(username);
+  const onChangeAmount= (e) => {
+    const amount = e.target.value;
+    setAmount(amount);
   };
 
-  const onChangePassword = (e) => {
-    const password = e.target.value;
-    setPassword(password);
-  };
 
-  const handleLogin = (e) => {
+  const handleTopUp = (e) => {
     e.preventDefault();
-
     setMessage("");
     setLoading(true);
-
     form.current.validateAll();
-
     if (checkBtn.current.context._errors.length === 0) {
-      AuthService.login(username, password).then(
+      AuthService.login(amount).then(
         () => {
-          navigate("/profile");
+          navigate("/home");
           window.location.reload();
         },
         (error) => {
@@ -64,35 +62,18 @@ const Login = () => {
   return (
     <div className="col-md-12">
       <div className="card card-container">
-        <img
-          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-          alt="profile-img"
-          className="profile-img-card"
-        />
          <p>
-        <strong>Login Page</strong>
+        <strong>Top Up Page</strong>
         </p>
-        <Form onSubmit={handleLogin} ref={form}>
+        <Form onSubmit={handleTopUp} ref={form}>
           <div className="form-group">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="amount">amount</label>
             <Input
               type="text"
               className="form-control"
-              name="username"
-              value={username}
-              onChange={onChangeUsername}
-              validations={[required]}
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <Input
-              type="password"
-              className="form-control"
-              name="password"
-              value={password}
-              onChange={onChangePassword}
+              name="amount"
+              value={amount}
+              onChange={onChangeAmount}
               validations={[required]}
             />
           </div>
@@ -102,7 +83,7 @@ const Login = () => {
               {loading && (
                 <span className="spinner-border spinner-border-sm"></span>
               )}
-              <span>Login</span>
+              <span>TopUp</span>
             </button>
           </div>
 
@@ -120,4 +101,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default TopUp;

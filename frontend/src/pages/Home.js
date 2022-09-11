@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from "react";
 
 import UserService from "../services/user.service";
+import AuthService from "../services/auth.service";
 
 const Home = () => {
   const [content, setContent] = useState("");
+  const currentUser = AuthService.getCurrentUser();
 
   useEffect(() => {
     UserService.getPublicContent().then(
       (response) => {
-        setContent(response.data);
+        setContent(JSON.stringify(response.data.users));
       },
       (error) => {
-        const _content =
-          (error.response && error.response.data) ||
-          error.message ||
-          error.toString();
-        setContent(_content);
+
+        setContent(error);
       }
     );
   }, []);

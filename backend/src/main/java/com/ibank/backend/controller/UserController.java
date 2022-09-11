@@ -27,7 +27,7 @@ import com.alibaba.fastjson.JSON;
 
 @Slf4j
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
     
     @Autowired  

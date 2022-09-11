@@ -174,6 +174,8 @@ public class UserService  implements IUserFacade {
       JwtResponse resp = new JwtResponse();
       User entity =  userRepo.findByUnique(request.username,request.password);
       String jwttoken=CreateJwt.getoken(entity);
+      UserVo userVo = BeanMapper.map(entity, UserVo.class);
+      resp.setUser(userVo);
       resp.setJwttoken(jwttoken);
       resp.setRetCode(HttpStatus.OK.value());
       resp.setRetMsg(" User Authenticate  Success");
@@ -189,8 +191,8 @@ public class UserService  implements IUserFacade {
         u.setEmail(request.getEmail());
         u.setPassword(request.getPassword());
         u.setStatus("Y");
-        userRepo.save(u);
-        String jwttoken=CreateJwt.getoken(entity);
+        User res =  userRepo.save(u);
+        String jwttoken=CreateJwt.getoken(res);
         resp.setJwttoken(jwttoken);
         resp.setRetCode(HttpStatus.OK.value());
         resp.setRetMsg(" Sign Up  Success");

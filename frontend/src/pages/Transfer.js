@@ -16,28 +16,26 @@ const required = (value) => {
   }
 };
 
-const Login = () => {
+const Transfer = () => {
   let navigate = useNavigate();
-
   const form = useRef();
   const checkBtn = useRef();
-
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [amount, setAmount] = useState("");
+  const [payee, setPayee] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const onChangeUsername = (e) => {
-    const username = e.target.value;
-    setUsername(username);
+  const onChangeAmount = (e) => {
+    const amount = e.target.value;
+    setAmount(amount);
   };
 
-  const onChangePassword = (e) => {
-    const password = e.target.value;
-    setPassword(password);
+  const onChangePayee = (e) => {
+    const payee = e.target.value;
+    setPayee(payee);
   };
 
-  const handleLogin = (e) => {
+  const handleTransfer = (e) => {
     e.preventDefault();
 
     setMessage("");
@@ -46,7 +44,7 @@ const Login = () => {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      AuthService.login(username, password).then(
+      AuthService.login(amount, payee).then(
         () => {
           navigate("/profile");
           window.location.reload();
@@ -64,35 +62,30 @@ const Login = () => {
   return (
     <div className="col-md-12">
       <div className="card card-container">
-        <img
-          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-          alt="profile-img"
-          className="profile-img-card"
-        />
          <p>
-        <strong>Login Page</strong>
+        <strong>Transfer Page</strong>
         </p>
-        <Form onSubmit={handleLogin} ref={form}>
+        <Form onSubmit={handleTransfer} ref={form}>
           <div className="form-group">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="amount">Amount</label>
             <Input
               type="text"
               className="form-control"
-              name="username"
-              value={username}
-              onChange={onChangeUsername}
+              name="amount"
+              value={amount}
+              onChange={onChangeAmount}
               validations={[required]}
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="payee">Payee</label>
             <Input
-              type="password"
+              type="text"
               className="form-control"
-              name="password"
-              value={password}
-              onChange={onChangePassword}
+              name="payee"
+              value={payee}
+              onChange={onChangePayee}
               validations={[required]}
             />
           </div>
@@ -102,7 +95,7 @@ const Login = () => {
               {loading && (
                 <span className="spinner-border spinner-border-sm"></span>
               )}
-              <span>Login</span>
+              <span> Transfer</span>
             </button>
           </div>
 
@@ -120,4 +113,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Transfer;

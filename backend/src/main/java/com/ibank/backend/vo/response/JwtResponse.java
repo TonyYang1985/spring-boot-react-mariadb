@@ -1,6 +1,8 @@
 package com.ibank.backend.vo.response;
 
 import com.ibank.backend.vo.BaseResponse;
+import com.ibank.backend.vo.UserVo;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,4 +13,5 @@ public class JwtResponse extends BaseResponse{
 	private static final long serialVersionUID = 1L;
     private String type = "Bearer";
     private  String jwttoken;
+    private  UserVo user;
 }

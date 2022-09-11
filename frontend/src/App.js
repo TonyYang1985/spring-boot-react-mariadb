@@ -3,17 +3,15 @@ import { Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import AuthService from "./services/auth.service";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
-import BoardUser from "./pages/BoardUser";
-import BoardModerator from "./pages/BoardModerator";
-import BoardAdmin from "./pages/BoardAdmin";
-
+import AuthService from "./services/auth.service";
 import EventBus from "./common/EventBus";
+import TopUp from "./pages/TopUp";
+import Transfer from "./pages/Transfer";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -22,10 +20,11 @@ const App = () => {
 
   useEffect(() => {
     const user = AuthService.getCurrentUser();
+    console.log(user)
     if (user) {
       setCurrentUser(user);
-      setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
-      setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
+     // setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
+     // setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
     }
 
     EventBus.on("logout", () => {
@@ -56,22 +55,25 @@ const App = () => {
               Home
             </Link>
           </li>
-
-          {showModeratorBoard && (
+          
+          {currentUser && (
             <li className="nav-item">
-              <Link to={"/mod"} className="nav-link">
-                Moderator Board
+              <Link to={"/topup"} className="nav-link">
+                TopUp
               </Link>
             </li>
           )}
 
-          {showAdminBoard && (
+        {currentUser && (
             <li className="nav-item">
-              <Link to={"/admin"} className="nav-link">
-                Admin Board
+              <Link to={"/transfer"} className="nav-link">
+                Fast  Transfer 
               </Link>
             </li>
           )}
+  
+
+  
 
           {currentUser && (
             <li className="nav-item">
@@ -117,11 +119,10 @@ const App = () => {
           <Route path="/" element={<Home/>} />
           <Route path="/home" element={<Home/>} />
           <Route path="/login" element={<Login/>} />
+          <Route path="/topup" element={<TopUp/>} />
+          <Route path="/transfer" element={<Transfer/>} />
           <Route path="/register" element={<Register/>} />
           <Route path="/profile" element={<Profile/>} />
-          <Route path="/user" element={<BoardUser/>} />
-          <Route path="/mod" element={<BoardModerator/>} />
-          <Route path="/admin" element={<BoardAdmin/>} />
         </Routes>
       </div>
 

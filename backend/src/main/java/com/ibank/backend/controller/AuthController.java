@@ -13,13 +13,13 @@ import com.ibank.backend.vo.request.SignupRequest;
 import com.ibank.backend.vo.response.JwtResponse;
 
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/api/auth")
 public class AuthController {
     
   @Autowired  
   private  UserService userService;
   
-  @PostMapping(value="/auth")
+  @PostMapping(value="/signin")
   @ResponseBody
   public JwtResponse authenticate(@RequestBody LoginRequest request) throws Exception {
         return  userService.authenticate(request);
