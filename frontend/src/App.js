@@ -12,6 +12,8 @@ import AuthService from "./services/auth.service";
 import EventBus from "./common/EventBus";
 import TopUp from "./pages/TopUp";
 import Transfer from "./pages/Transfer";
+import User from "./pages/User";
+
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -71,14 +73,11 @@ const App = () => {
               </Link>
             </li>
           )}
-  
-
-  
 
           {currentUser && (
             <li className="nav-item">
               <Link to={"/user"} className="nav-link">
-                User
+                Create User
               </Link>
             </li>
           )}
@@ -120,6 +119,7 @@ const App = () => {
           <Route path="/home" element={<Home/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/topup" element={<TopUp/>} />
+          <Route path="/user" element={<User/>} />
           <Route path="/transfer" element={<Transfer/>} />
           <Route path="/register" element={<Register/>} />
           <Route path="/profile" element={<Profile/>} />

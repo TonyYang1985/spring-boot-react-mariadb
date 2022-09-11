@@ -17,7 +17,7 @@ const transfer = (amount, payee) => {
     .post("/api/opt/transfer", {
        amount,
        payee,
-    }),{ headers: authHeader() }
+    },{ headers: authHeader() })
     .then((response) => {
       return response.data;
     });
