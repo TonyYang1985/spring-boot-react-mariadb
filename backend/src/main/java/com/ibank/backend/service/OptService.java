@@ -19,13 +19,13 @@ import lombok.extern.slf4j.Slf4j;
 public class OptService  implements IOptFacade {
     
     @Override
-    public TopUpResponse topup(TopUpResquest request) {
+    public TopUpResponse topup(TopUpResquest request,int userid) {
         TopUpResponse resp = new TopUpResponse();
         return resp;
     }
 
     @Override
-    public TranferResponse transfer(TranferRequest request) {
+    public TranferResponse transfer(TranferRequest request,int userid) {
         TranferResponse resp = new TranferResponse();
         return resp;
     }}

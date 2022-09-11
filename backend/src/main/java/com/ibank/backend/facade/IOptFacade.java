@@ -6,6 +6,6 @@ import com.ibank.backend.vo.response.TopUpResponse;
 import com.ibank.backend.vo.response.TranferResponse;
 
 public interface IOptFacade {
-    TopUpResponse topup(TopUpResquest request);
-    TranferResponse transfer(TranferRequest request);
+    TopUpResponse topup(TopUpResquest request, int userId);
+    TranferResponse transfer(TranferRequest request,int userId);
 }
