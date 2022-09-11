@@ -175,6 +175,7 @@ public class UserService  implements IUserFacade {
       User entity =  userRepo.findByUnique(request.username,request.password);
       String jwttoken=CreateJwt.getoken(entity);
       UserVo userVo = BeanMapper.map(entity, UserVo.class);
+      userVo.setRole("admin");
       resp.setUser(userVo);
       resp.setJwttoken(jwttoken);
       resp.setRetCode(HttpStatus.OK.value());

@@ -5,6 +5,8 @@ import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 import { useNavigate } from 'react-router-dom';
 import UserService from "../services/user.service";
+import AuthService from "../services/auth.service";
+
 
 const required = (value) => {
   if (!value) {
@@ -55,6 +57,7 @@ const User = () => {
   const [password, setPassword] = useState("");
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
+  const currentUser = AuthService.getCurrentUser();
 
   const onChangeUsername = (e) => {
     const username = e.target.value;
@@ -94,6 +97,19 @@ const User = () => {
       );
     }
   };
+
+  if(currentUser?.role  !== 'admin'){
+    return (
+      <div className="container">
+        <header className="jumbotron">
+          <h3>
+            <strong>{` No Access `} </strong> 
+          </h3>  
+        </header>
+
+      </div>
+    );
+  }
 
   return (
     <div className="col-md-12">
