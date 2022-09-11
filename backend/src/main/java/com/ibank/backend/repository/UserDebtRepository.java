@@ -12,7 +12,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserDebtRepository extends JpaRepository<UserDebt, Integer> {
    
-    @Query("SELECT u FROM UserDebt u WHERE u.userId  = :userId")
-    public List<UserDebt> findUserDebtByUserId(@Param("userId") int userId);
+    @Query("SELECT u FROM UserDebt u WHERE u.status  = :status and  u.userId  = :userId")
+    public List<UserDebt> findUserDebtByUserId(@Param("status") String status ,@Param("userId") int userId);
+
+    @Query("SELECT SUM(debt) FROM UserDebt u WHERE u.status  = :status and  u.userId  = :userId")
+    public double sumUserDebtByUserId(@Param("status") String status ,@Param("userId") int userId);
+
 }
 

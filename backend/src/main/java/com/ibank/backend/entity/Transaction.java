@@ -1,7 +1,7 @@
 package com.ibank.backend.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
