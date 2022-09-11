@@ -12,6 +12,7 @@ import com.ibank.backend.vo.request.TranferRequest;
 import com.ibank.backend.vo.response.TopUpResponse;
 import com.ibank.backend.vo.response.TranferResponse;
 
+import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -19,13 +20,13 @@ import lombok.extern.slf4j.Slf4j;
 public class OptService  implements IOptFacade {
     
     @Override
-    public TopUpResponse topup(TopUpResquest request,int userid) {
+    public TopUpResponse topup(TopUpResquest request, Claims cls) {
         TopUpResponse resp = new TopUpResponse();
         return resp;
     }
 
     @Override
-    public TranferResponse transfer(TranferRequest request,int userid) {
+    public TranferResponse transfer(TranferRequest request, Claims cls) {
         TranferResponse resp = new TranferResponse();
         return resp;
     }}

@@ -32,16 +32,17 @@ public class OptController {
   @PostMapping(value="/topup")
   @ResponseBody
   public  TopUpResponse topup(@RequestBody TopUpResquest request,@RequestHeader("Authorization") String token) throws Exception {
-      //Claims cls =PraseJwtTest.tokenToOut(token.replace("Bearer ", ""));
+      Claims cls =PraseJwtTest.tokenToOut(token.replace("Bearer ", ""));
       //log.info("topup save request {}",cls.get("jti"));
-      return  optService.topup(request);
+      return  optService.topup(request,cls);
      }   
      
   @PostMapping(value="/transfer")
   @ResponseBody
   public TranferResponse transfer(@RequestBody TranferRequest request,@RequestHeader("Authorization") String token) {
+    Claims cls =PraseJwtTest.tokenToOut(token.replace("Bearer ", ""));
     log.info("topup save request {}",token);
-    return  optService.transfer(request);
+    return  optService.transfer(request,cls);
   }  
     
 }
