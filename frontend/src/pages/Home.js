@@ -21,17 +21,52 @@ const Home = () => {
       }
     );
   }, []);
+  if(currentUser?.role  === 'admin'){
+    return (<div>
+      <div className="card">
+          <DataTable value={user} responsiveLayout="scroll">
+              <Column field="id" header="ID"></Column>
+              <Column field="username" header="Name"></Column>
+              <Column field="email" header="Email"></Column>
+          </DataTable>
+      </div>
+    </div>);
+  }
 
- 
-  return (<div>
-  <div className="card">
-      <DataTable value={user} responsiveLayout="scroll">
-          <Column field="id" header="ID"></Column>
-          <Column field="username" header="Name"></Column>
-          <Column field="email" header="Email"></Column>
-      </DataTable>
-  </div>
-</div>);
+    return (
+      <div className="container">
+        <header className="jumbotron">
+          <h3>
+            <strong>{`Welcome  ${currentUser.username}`} </strong> 
+          </h3>
+
+          <p>
+          <strong>Id:</strong> {currentUser.id}
+        </p>
+        <p>
+          <strong>Name:</strong> {currentUser.username}
+        </p>
+        <p>
+          <strong>Email:</strong> {currentUser.email}
+        </p>
+
+        <p>
+          <strong>Role:</strong> {currentUser.email}
+        </p>
+
+        <p>
+          <strong>Balance:</strong> {currentUser.email}
+        </p>
+
+        <p>
+          <strong>debt:</strong> {currentUser.email}
+        </p>
+        </header>
+
+      </div>
+    );
+
+
 };
 
 export default Home;
