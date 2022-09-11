@@ -22,10 +22,11 @@ spring-boot-react-mariadb: Spring Boot + JPA + Docker + Mariadb  + Openjdk + Mav
 ## 5. Running SpringBoot Backedn Project 
 * Spring Boot version 2.6.11 
 * OpenJDK 11
+* Server port 8082
 
 
 ## 6. Running React Frontend Project 
-* Login Application Spring Boot 
+* Server port 8080
 
 ## 7. Running API UnitTest   
 *  Running API UnitTest
