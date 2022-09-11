@@ -1,6 +1,5 @@
 package com.ibank.backend.repository;
 
-import com.ibank.backend.entity.User;
 import com.ibank.backend.entity.UserDebt;
 
 
