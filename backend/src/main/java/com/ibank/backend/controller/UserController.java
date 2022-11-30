@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.ibank.backend.interfaces.annotation.AutoRegisterController;
 import com.ibank.backend.service.UserService;
 import com.ibank.backend.vo.request.CreateUserRequest;
 import com.ibank.backend.vo.request.DeleteUserRequest;

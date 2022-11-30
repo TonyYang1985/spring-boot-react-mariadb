@@ -1,0 +1,26 @@
+version: "3.5"
+services:
+  mariadb1:
+    image: bitnami/mariadb
+    networks:
+      - vecandx
+    ports:
+      - "13306:3306"
+    volumes:
+      - "mariadb_data:/bitnami/mariadb"  
+    restart: always              
+    environment:
+      - MARIADB_CHARACTER_SET=utf8mb4
+      - MARIADB_COLLATE=utf8mb4_unicode_ci
+      - MARIADB_ROOT_USER=root
+      - MARIADB_ROOT_PASSWORD=D3uAAwEyK4
+      - MARIADB_DATABASE=demo
+      - MARIADB_USER=demo
+      - MARIADB_PASSWORD=demo
+      - MARIADB_SKIP_TEST_DB=yes
+volumes:
+  mariadb_data:
+    driver: local
+networks:
+  vecandx:
+    external: true

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ibank.backend.interfaces.annotation.AutoRegisterController;
 import com.ibank.backend.service.OptService;
 import com.ibank.backend.utils.PraseJwtTest;
 import com.ibank.backend.vo.request.TopUpResquest;
