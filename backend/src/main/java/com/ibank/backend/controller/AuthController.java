@@ -15,7 +15,7 @@ import com.ibank.backend.vo.response.JwtResponse;
 
 @AutoRegisterController
 @Controller
-@RequestMapping("/api/auth")
+@RequestMapping(value="/api/auth",name="2223")
 public class AuthController {
     
   @Autowired  
@@ -36,6 +36,12 @@ public class AuthController {
   @GetMapping(value="/{id}/enity")
   @ResponseBody
   public UniqueUserResponse getUserById(@PathVariable int id ) {
+    return null;
+  }
+
+  @GetMapping(value="/{id}/user")
+  @ResponseBody
+  public UniqueUserResponse getUserId2(int id ) {
     return null;
   }
 
