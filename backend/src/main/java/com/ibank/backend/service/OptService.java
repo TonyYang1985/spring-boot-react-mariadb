@@ -39,6 +39,20 @@ public class OptService  implements IOptFacade {
     private  TransactionRepository transRepo;
 
 
+    @Autowired
+    private RestClient restClient
+
+    //
+    restClient.api(UC_API.usercenter.Roles.queryRoles).urlParam(param).call();
+    //
+    restClient.api(UC_API.usercenter.Users.unlockUser).pathParam({ userId:userId }).call();
+    //
+     this.restClient.api(UC_API.usercenter.Users.unlockUser).pathParam({ userId }).headers({ headers: {Auth:'xxx'} }).call();
+    //
+    restClient.api(UC_API.usercenter.Users.updateUserPassword).pathParam({ userId }).call({ password: pwd });
+
+
+
     @Override
     public TopUpResponse topup(TopUpResquest request, Claims cls) {
         TopUpResponse resp = new TopUpResponse();

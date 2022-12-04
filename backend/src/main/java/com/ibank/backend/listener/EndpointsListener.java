@@ -27,7 +27,6 @@ public class EndpointsListener implements ApplicationListener<ContextRefreshedEv
         ApplicationContext applicationContext = event.getApplicationContext();
 //        applicationContext.getBean(RequestMappingHandlerMapping.class).getHandlerMethods()
 //                .forEach((key, value) -> log.info("{} {}", key, value));
-
 //        Map<String, Object> controllers = applicationContext.getBeansWithAnnotation(AutoRegisterController.class);
 //
 //        for (Map.Entry<String, Object> entry : controllers.entrySet()) {
@@ -97,9 +96,11 @@ public class EndpointsListener implements ApplicationListener<ContextRefreshedEv
             for( Parameter i: parameters){
                 log.info("4. Method-Parameter  :{}",  JSON.toJSONString(i));
             }
+
             for( Annotation[] i: _parameters){
                 log.info("5. Method-Parameter Annotations  :{}",  JSON.toJSONString(i));
             }
+
             for( Annotation i: annotations){
                 log.info("6 . Method - Annotations  :{}",  JSON.toJSONString(i.annotationType()));
                 log.info("7. Method - Annotations  :{}",  JSON.toJSONString(i.toString()));

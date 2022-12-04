@@ -1,0 +1,25 @@
+{
+   "usercenter":
+   [
+    {
+     "name": "signInByEmail",
+     "method":"POST",
+     "endPoint": "{{usercenterBaseUrl}}/usercenter/signIn/email"
+    },
+    {
+       "name": "signUp",
+       "method":"POST",
+       "endPoint": "{{usercenterBaseUrl}}/usercenter/signUp"
+    },
+    {
+        "name": "refreshToken",
+        "method":"GET",
+        "endPoint": "{{usercenterBaseUrl}}/usercenter/refreshToken"
+    },
+    {
+        "name": "signOut",
+        "method":"GET",
+        "endPoint": "{{usercenterBaseUrl}}/usercenter/signOut"
+    }
+   ]
+}

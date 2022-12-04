@@ -1,0 +1,5 @@
+{
+    "usercenterBaseUrl": "http://usercenter:3000/api/v1",
+    "configcenterBaseUrl": "http://configcenter:3000/api/v1"
+
+}

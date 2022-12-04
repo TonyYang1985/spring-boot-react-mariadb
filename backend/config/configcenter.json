@@ -1,0 +1,25 @@
+{
+   "configcenter":
+   [
+    {
+     "name": "getConfig",
+     "method":"GET",
+     "endPoint": "{{configcenterBaseUrl}}/configcenter/configs/{{scope}}/{{name}}"
+    },
+    {
+       "name": "setValue",
+       "method":"POST",
+       "endPoint": "{{configcenterBaseUrl}}/configcenter/configs/{{scope}}/{{name}}"
+    },
+    {
+        "name": "getAllConfigs",
+        "method":"GET",
+        "endPoint": "{{configcenterBaseUrl}}/configcenter/configs"
+    },
+    {
+        "name": "setEnable",
+        "method":"PUT",
+        "endPoint": "{{configcenterBaseUrl}}/configcenter/configs/{{scope}}/{{name}}/setEnable"
+    }
+   ]
+}
