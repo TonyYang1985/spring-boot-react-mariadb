@@ -21,8 +21,8 @@ import lombok.extern.slf4j.Slf4j;
 
 
 @Slf4j
-@Controller
-@RequestMapping("/api/opt")
+//@Controller
+//@RequestMapping("/api/opt")
 public class OptController {
     
   @Autowired  

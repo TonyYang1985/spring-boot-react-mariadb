@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.Parameter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -72,85 +73,41 @@ public class EndpointsListener implements ApplicationListener<ContextRefreshedEv
     private boolean registerMapping(ApplicationContext applicationContext,String beanName) {
         Object obj = applicationContext.getBean(beanName);
         Class<?> objClass = obj.getClass();
-        List<Method> methodList = Arrays.asList(objClass.getDeclaredMethods());
-        //删除静态函数
-        methodList.removeIf(r -> Modifier.isStatic(r.getModifiers()));
-        //删除私有函数
-        methodList.removeIf(r -> Modifier.isPrivate(r.getModifiers()));
-//        for (Method method : methodList) {
-//            RequestMethod[] requestMethods = buildRequestMethod(method);
-//        }
+        List<Method> methods = Arrays.asList(objClass.getDeclaredMethods());
+        //remove static private
+        methods.removeIf(r -> Modifier.isStatic(r.getModifiers()));
+        methods.removeIf(r -> Modifier.isPrivate(r.getModifiers()));
+        //
         RequestMapping annotation = objClass.getAnnotation(RequestMapping.class);
         RequestMapping declaredAnnotation = objClass.getDeclaredAnnotation(RequestMapping.class);
-
-//        log.info("annotation  :{}",  JSON.toJSONString(annotation.value()));
-//        log.info("declaredAnnotation  :{}",  JSON.toJSONString(declaredAnnotation.value()));
-
-        for (Method method : methodList) {
-
+        log.info("0.0  RequestMapping Name:{}",  JSON.toJSONString(annotation.value()));
+        for (Method method : methods) {
             RequestMapping requestMapping = AnnotationUtils.findAnnotation(method, RequestMapping.class);
-            log.info("1 RequestMapping api  method Name:{}",  JSON.toJSONString(method.getName()));
-            log.info("2 RequestMapping api method :{}",  JSON.toJSONString(requestMapping.method()));
-            log.info("3 RequestMapping api :{}",  JSON.toJSONString(requestMapping.value()));
-
-            GetMapping getRequestMothed =  method.getDeclaredAnnotation(GetMapping.class);
-            PutMapping putRequestMothed = method.getDeclaredAnnotation(PutMapping.class);
-            PostMapping postRequestMothed =method.getDeclaredAnnotation(PostMapping.class);
-            DeleteMapping deleteRequestMothed =method.getDeclaredAnnotation(DeleteMapping.class);
-
-
-            log.info("getParameterAnnotations  :{}",  JSON.toJSONString(method.getParameterAnnotations()));
+            //Method Annotation
             Annotation[] annotations =method.getAnnotations();
-            Annotation[][] parameterAnnotations = method.getParameterAnnotations();
+            //Parameter
+            Parameter[] parameters =  method.getParameters();
+            //Parameter Annotations
+            Annotation[][]  _parameters= method.getParameterAnnotations();
 
+            log.info("1 Method  method Name:{}",  JSON.toJSONString(method.getName()));
+            log.info("2 Method method :{}",  JSON.toJSONString(requestMapping.method()));
+            log.info("3 Method api :{}",  JSON.toJSONString(requestMapping.value()));
+
+            for( Parameter i: parameters){
+                log.info("4. Method-Parameter  :{}",  JSON.toJSONString(i));
+            }
+            for( Annotation[] i: _parameters){
+                log.info("5. Method-Parameter Annotations  :{}",  JSON.toJSONString(i));
+            }
             for( Annotation i: annotations){
-                log.info("5.getAnnotations  :{}",  JSON.toJSONString(i.annotationType()));
-                log.info("6. getAnnotations  :{}",  JSON.toJSONString(i.toString()));
-            }
-
-            for( Annotation[] i: parameterAnnotations){
-                log.info("5.getAnnotations  :{}",  JSON.toJSONString(i));
-                log.info("6. getAnnotations  :{}",  JSON.toJSONString(i.toString()));
-            }
-            if(getRequestMothed !=null){
-               // log.info("getName  :{}",  JSON.toJSONString(method.getName()));
-
-
-//                log.info("getRequestMothed  :{}",  JSON.toJSONString(getRequestMothed.value()));
-//                log.info("getParameterTypes  :{}",  JSON.toJSONString(method.getParameterTypes()));
-//                log.info("getParameters  :{}",  JSON.toJSONString(method.getParameters()));
-//                log.info("getTypeParameters  :{}",  JSON.toJSONString(method.getTypeParameters()));
-//                log.info("getParameterAnnotations  :{}",  JSON.toJSONString(method.getParameterAnnotations()));
-
-                log.info("4 getRequestMothed api :{}",  JSON.toJSONString(getRequestMothed.value()));
-                log.info("getRequestMothed  :{}",  JSON.toJSONString(getRequestMothed.value()));
-                log.info("getRequestMothed  :{}",  JSON.toJSONString(method.getParameters()));
-            }
-            if(putRequestMothed !=null){
-                log.info("putRequestMothed  :{}",  JSON.toJSONString(putRequestMothed.value()));
-                log.info("putRequestMothed  :{}",  JSON.toJSONString(method.getParameters()));
-            }
-            if(postRequestMothed !=null){
-                log.info("postRequestMothed  :{}",  JSON.toJSONString(postRequestMothed.value()));
-                log.info("postRequestMothed  :{}",  JSON.toJSONString( method.getParameters()));
-            }
-            if(deleteRequestMothed !=null){
-                log.info("deleteRequestMothed  :{}",  JSON.toJSONString(deleteRequestMothed.value()));
-                log.info("deleteRequestMothed  :{}",  JSON.toJSONString( method.getParameters()));
+                log.info("6 . Method - Annotations  :{}",  JSON.toJSONString(i.annotationType()));
+                log.info("7. Method - Annotations  :{}",  JSON.toJSONString(i.toString()));
+                if(i instanceof GetMapping  ){
+                    log.info("8. Method- GetMapping  :{}",  ((GetMapping) i).value());
+                }
             }
         }
         return true;
     }
-
-    private RequestMethod[] buildRequestMethod(Method method) {
-        RequestMapping requestMapping = AnnotationUtils.findAnnotation(method, RequestMapping.class);
-        log.info("RequestMapping api :{}",  JSON.toJSONString(requestMapping.method()));
-        log.info("RequestMapping api :{}",  JSON.toJSONString(requestMapping.value()));
-        if (requestMapping != null) {
-            return requestMapping.method();
-        } else {
-            return new RequestMethod[]{RequestMethod.GET};
-        }
-    }
-
 }
