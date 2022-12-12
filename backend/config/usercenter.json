@@ -4,21 +4,25 @@
     {
      "name": "signInByEmail",
      "method":"POST",
+     "anonymous": false,
      "endPoint": "{{usercenterBaseUrl}}/usercenter/signIn/email"
     },
     {
        "name": "signUp",
        "method":"POST",
+       "anonymous": false,
        "endPoint": "{{usercenterBaseUrl}}/usercenter/signUp"
     },
     {
         "name": "refreshToken",
         "method":"GET",
+        "anonymous": false,
         "endPoint": "{{usercenterBaseUrl}}/usercenter/refreshToken"
     },
     {
         "name": "signOut",
         "method":"GET",
+        "anonymous": false,
         "endPoint": "{{usercenterBaseUrl}}/usercenter/signOut"
     }
    ]

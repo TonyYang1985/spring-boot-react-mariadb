@@ -2,14 +2,14 @@ package com.ibank.backend.rest;
 
 import java.util.Map;
 
-public class CallChain<T> {
+public class CallChain{
     
     private String api;
     private RestClient  client;
 
     private Map<String, ?> _pathParam;
     private Map<String, ?> _urlParam;
-    private T _data;
+    private  Object _data;
     private Map<String, ?> _headers;
   
     CallChain(String api, RestClient client) {
@@ -26,7 +26,7 @@ public class CallChain<T> {
         this._urlParam = urlParam;
         return this;
       }
-      public <T> CallChain data(T data){
+      public  CallChain data(Object data){
         this._data = data;
         return this;
       }
@@ -36,7 +36,7 @@ public class CallChain<T> {
         return this;
       }
     
-    public <T> T CallChain(T data) {
+    public Object CallChain(Object data) {
         this.data(data);
         return this.client.call(this.api, this._pathParam, this._urlParam, this._data, this._headers);
     }

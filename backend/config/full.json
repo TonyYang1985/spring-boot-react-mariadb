@@ -1,0 +1,37 @@
+{
+    "app_name":"usercenter ",
+    "app_desc":" usercenter api from user",
+    "auto_test_id":"UC1112",
+    "schedule":"0 0 * * *(At 00:00)", 
+    "enable":"false",
+    "resource_load":"test/config",
+    "res_path":"test/request/",
+    "result_path":"test/report" ,
+    "endpoints":
+    [
+     {
+      "name": "signInByEmail",
+      "method":"POST",
+      "anonymous": false,
+      "endPoint": "{{usercenterBaseUrl}}/usercenter/signIn/email",
+      "testcases":[
+        {
+        "testcasename":"cs1",
+        "headerParam":[
+            {"key":"Authorization" ,"value":"Bearer xxxx"}
+        ],
+        "queryParam":[
+            {"key":"name" ,"value":"122"}
+        ],
+        "pathParam":[
+            {"key":"userId" ,"value":"xxx"}
+        ],
+        "body":{"userId":"1222","age":12 },
+        "respHeader":[],
+        "respBody":[]
+        }
+      ]
+     }
+    ]
+    
+}

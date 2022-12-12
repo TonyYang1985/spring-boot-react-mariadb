@@ -4,21 +4,25 @@
     {
      "name": "getConfig",
      "method":"GET",
+     "anonymous": false,
      "endPoint": "{{configcenterBaseUrl}}/configcenter/configs/{{scope}}/{{name}}"
     },
     {
        "name": "setValue",
        "method":"POST",
+       "anonymous": false,
        "endPoint": "{{configcenterBaseUrl}}/configcenter/configs/{{scope}}/{{name}}"
     },
     {
         "name": "getAllConfigs",
         "method":"GET",
+        "anonymous": false,
         "endPoint": "{{configcenterBaseUrl}}/configcenter/configs"
     },
     {
         "name": "setEnable",
         "method":"PUT",
+        "anonymous": false,
         "endPoint": "{{configcenterBaseUrl}}/configcenter/configs/{{scope}}/{{name}}/setEnable"
     }
    ]

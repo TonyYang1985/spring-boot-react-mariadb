@@ -88,19 +88,15 @@ public class EndpointsListener implements ApplicationListener<ContextRefreshedEv
             Parameter[] parameters =  method.getParameters();
             //Parameter Annotations
             Annotation[][]  _parameters= method.getParameterAnnotations();
-
             log.info("1 Method  method Name:{}",  JSON.toJSONString(method.getName()));
             log.info("2 Method method :{}",  JSON.toJSONString(requestMapping.method()));
             log.info("3 Method api :{}",  JSON.toJSONString(requestMapping.value()));
-
             for( Parameter i: parameters){
                 log.info("4. Method-Parameter  :{}",  JSON.toJSONString(i));
             }
-
             for( Annotation[] i: _parameters){
                 log.info("5. Method-Parameter Annotations  :{}",  JSON.toJSONString(i));
             }
-
             for( Annotation i: annotations){
                 log.info("6 . Method - Annotations  :{}",  JSON.toJSONString(i.annotationType()));
                 log.info("7. Method - Annotations  :{}",  JSON.toJSONString(i.toString()));

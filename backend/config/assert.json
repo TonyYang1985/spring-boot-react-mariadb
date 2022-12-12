@@ -1,0 +1,14 @@
+{
+    "assertRule":[
+        {
+            "xpath":"resBody.emp.age",
+            "assertRule":"lt|=|equals|gt|not empty|between|in",
+            "value":[12]
+         },
+        {
+            "xpath":"resBody.emp.birh",
+            "assertRule":"lt|=|equals|gt|not empty|between|in",
+            "value":["1990","2016"]
+        }
+    ]
+}
